@@ -5,7 +5,7 @@ built as a single self-contained HTML file. The whole page is framed as a QA
 validation run — sections are test cases with PASS / RUNNING / READY status, and
 selected work is shown as test-case and bug artifacts.
 
-**Live site:** _add your URL here_ — e.g. `https://<username>.github.io/portfolio/`
+**Live site:** _add your URL here_ — e.g. `https://pvjinde.github.io/portfolio/`
 
 ---
 
