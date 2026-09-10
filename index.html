@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<script>(function(){var d=document.documentElement;d.className="js";try{var t=localStorage.getItem("pvj-theme");if(t==="light"||t==="dark"){d.setAttribute("data-theme",t);}}catch(e){}})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Priyanka Jinde · Senior QA Engineer · Telecom</title>
+<meta name="description" content="Senior Software QA Engineer with 8+ years across 4G / CBRS / MOCN telecom infrastructure. Private network validation, RAN interoperability, core performance testing, and a self-built AI test-plan pipeline." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --radius:10px;
+    --maxw:860px;
+    --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --sans:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  }
+  html[data-theme="dark"]{
+    --bg:#0B0F17; --surface:#121826; --surface-2:#182234;
+    --line:#243247; --line-soft:#1b2536;
+    --text:#E7EDF5; --muted:#8A9AB0; --faint:#5D6E85;
+    --pass:#46C98B; --pass-dim:#1c3a30; --run:#E7A33E; --run-dim:#3a2e18;
+    --accent:#38C6E4; --accent-ink:#0B0F17;
+    --glow1:rgba(56,198,228,.07); --glow2:rgba(70,201,139,.05);
+    --sel:rgba(56,198,228,.28); --topbar:rgba(11,15,23,.82);
+    --chip-pass-bd:rgba(70,201,139,.32); --chip-run-bd:rgba(231,163,62,.32);
+    --chip-ready-bg:rgba(56,198,228,.10); --chip-ready-bd:rgba(56,198,228,.30);
+    --btn-hover:#5cd3ec; --bug-shadow:rgba(0,0,0,.5);
+    --bug:#E5484D; --bug-head:#141821;
+  }
+  html[data-theme="light"]{
+    --bg:#FBF9FD; --surface:#FFFFFF; --surface-2:#F2EBF8;
+    --line:#E3D8EF; --line-soft:#ECE4F3;
+    --text:#2B2136; --muted:#6B6077; --faint:#8C7F9C;
+    --pass:#1F9D63; --pass-dim:#E6F5ED; --run:#B06A16; --run-dim:#F7EEDD;
+    --accent:#7A4D9C; --accent-ink:#FFFFFF;
+    --glow1:rgba(122,77,156,.10); --glow2:rgba(122,77,156,.06);
+    --sel:rgba(122,77,156,.22); --topbar:rgba(251,249,253,.85);
+    --chip-pass-bd:rgba(31,157,99,.30); --chip-run-bd:rgba(176,106,22,.30);
+    --chip-ready-bg:rgba(122,77,156,.10); --chip-ready-bd:rgba(122,77,156,.30);
+    --btn-hover:#8C61AC; --bug-shadow:rgba(0,0,0,.22);
+    --bug:#7A4D9C; --bug-head:#2B2136;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1100px 520px at 85% -10%, var(--glow1), transparent 60%),
+      radial-gradient(900px 600px at -5% 8%, var(--glow2), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    transition:background-color .25s ease,color .25s ease;
+    font-family:var(--sans);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  ::selection{background:var(--sel);}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    background:var(--topbar);
+    backdrop-filter:saturate(140%) blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .topbar-in{
+    max-width:var(--maxw);margin:0 auto;padding:11px 22px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .brand{font-family:var(--mono);font-size:14px;letter-spacing:.02em;color:var(--text);font-weight:500;white-space:nowrap;}
+  .brand b{color:var(--accent);font-weight:600;}
+  .avail{
+    margin-left:auto;display:inline-flex;align-items:center;gap:7px;
+    font-family:var(--mono);font-size:11.5px;color:var(--muted);
+    border:1px solid var(--line);border-radius:100px;padding:5px 11px;white-space:nowrap;
+  }
+  .nav{display:flex;gap:17px;margin-left:20px;}
+  .nav a{font-family:var(--mono);font-size:12.5px;color:var(--muted);transition:color .15s;}
+  .nav a:hover{color:var(--accent);text-decoration:none;}
+  @media(max-width:820px){.nav{display:none;}}
+  .themebtn{margin-left:10px;cursor:pointer;font-family:var(--mono);font-size:14px;line-height:1;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 9px;transition:color .15s,border-color .15s;}
+  .themebtn:hover{color:var(--accent);border-color:var(--accent);}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--pass);box-shadow:0 0 0 0 rgba(70,201,139,.5);}
+  .live .dot{animation:pulse 2.4s ease-out infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(70,201,139,.45)}70%{box-shadow:0 0 0 7px rgba(70,201,139,0)}100%{box-shadow:0 0 0 0 rgba(70,201,139,0)}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 30px;}
+  .prompt{font-family:var(--mono);font-size:13.5px;color:var(--faint);margin-bottom:22px;}
+  .prompt .c{color:var(--accent);}
+  .prompt .path{color:var(--muted);}
+  .hero h1{
+    font-family:var(--mono);font-weight:500;
+    font-size:clamp(29px,5.2vw,46px);
+    line-height:1.14;letter-spacing:-.01em;margin:0 0 20px;color:var(--text);
+    max-width:16ch;
+  }
+  .hero h1 .em{color:var(--accent);}
+  .lede{font-size:17px;color:var(--muted);max-width:60ch;margin:0 0 26px;}
+  .lede b{color:var(--text);font-weight:600;}
+  .meta{font-family:var(--mono);font-size:13px;color:var(--faint);display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;}
+  .meta span{display:inline-flex;align-items:center;gap:7px;}
+  .meta .k{color:var(--accent);}
+  .cta-row{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px;}
+  .btn{
+    font-family:var(--mono);font-size:13.5px;font-weight:500;
+    display:inline-flex;align-items:center;gap:9px;
+    padding:11px 18px;border-radius:8px;border:1px solid var(--line);
+    color:var(--text);background:var(--surface);transition:border-color .15s,transform .15s,background .15s;
+  }
+  .btn:hover{text-decoration:none;border-color:var(--accent);transform:translateY(-1px);}
+  .btn-primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600;}
+  .btn-primary:hover{background:var(--btn-hover);border-color:var(--btn-hover);}
+
+  /* ---------- stat band ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:12px;overflow:hidden;margin-top:34px;}
+  .stat{background:var(--surface);padding:17px 16px;}
+  .stat .n{font-family:var(--mono);font-size:24px;font-weight:600;color:var(--text);line-height:1;letter-spacing:-.01em;}
+  .stat .n .u{color:var(--accent);font-size:16px;}
+  .stat .l{font-size:11.5px;color:var(--muted);margin-top:9px;line-height:1.4;}
+  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr);}}
+
+  /* ---------- section shell ---------- */
+  .tc{padding:34px 0;border-top:1px solid var(--line-soft);scroll-margin-top:66px;}
+  .tc-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap;}
+  .tc-id{font-family:var(--mono);font-size:12px;color:var(--faint);border:1px solid var(--line);border-radius:6px;padding:3px 8px;letter-spacing:.05em;}
+  .tc-title{font-family:var(--sans);font-size:20px;font-weight:600;margin:0;color:var(--text);flex:0 1 auto;}
+  .chip{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;padding:4px 9px;border-radius:5px;margin-left:auto;display:inline-flex;align-items:center;gap:6px;}
+  .chip-pass{color:var(--pass);background:var(--pass-dim);border:1px solid var(--chip-pass-bd);}
+  .chip-run{color:var(--run);background:var(--run-dim);border:1px solid var(--chip-run-bd);}
+  .chip-run .rdot{width:6px;height:6px;border-radius:50%;background:var(--run);}
+  .live .chip-run .rdot{animation:pulse2 1.6s infinite;}
+  @keyframes pulse2{0%,100%{opacity:1}50%{opacity:.35}}
+  .chip-ready{color:var(--accent);background:var(--chip-ready-bg);border:1px solid var(--chip-ready-bd);}
+  .chip-demo{color:var(--muted);background:var(--surface-2);border:1px solid var(--line);}
+
+  /* ---------- profile ---------- */
+  .profile-grid{display:grid;grid-template-columns:1.65fr 1fr;gap:26px;}
+  .profile-prose p{margin:0 0 14px;color:var(--muted);}
+  .profile-prose p b{color:var(--text);font-weight:600;}
+  .facts{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--radius);padding:6px 18px;}
+  .fact{padding:13px 0;border-bottom:1px solid var(--line-soft);}
+  .fact:last-child{border-bottom:0;}
+  .fact .fl{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.05em;margin-bottom:3px;}
+  .fact .fv{font-size:14.5px;color:var(--text);}
+
+  /* ---------- skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .skillcard{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--radius);padding:16px 17px;}
+  .skillcard h3{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent);margin:0 0 12px;letter-spacing:.02em;display:flex;align-items:center;gap:8px;}
+  .skillcard h3 .ok{color:var(--pass);}
+  .taglist{display:flex;flex-wrap:wrap;gap:7px;}
+  .tag{font-size:12.5px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line-soft);border-radius:6px;padding:4px 9px;line-height:1.3;}
+
+  /* ---------- career ---------- */
+  .job{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line-soft);}
+  .job:last-child{border-bottom:0;}
+  .job-when{font-family:var(--mono);font-size:12.5px;color:var(--faint);}
+  .job-when .st{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:10.5px;letter-spacing:.08em;font-weight:600;}
+  .st-pass{color:var(--pass);} .st-run{color:var(--run);}
+  .st .sdot{width:6px;height:6px;border-radius:50%;background:currentColor;}
+  .job h3{font-size:16.5px;margin:0 0 2px;color:var(--text);font-weight:600;}
+  .job .co{font-family:var(--mono);font-size:12.5px;color:var(--accent);margin-bottom:11px;}
+  .job ul{margin:0;padding-left:18px;}
+  .job li{color:var(--muted);font-size:14.5px;margin-bottom:7px;padding-left:2px;}
+  .job li b{color:var(--text);font-weight:600;}
+
+  /* ---------- case studies ---------- */
+  .cs-note{font-size:13px;color:var(--faint);background:var(--surface);border:1px dashed var(--line);border-radius:8px;padding:11px 14px;margin-bottom:22px;font-family:var(--mono);line-height:1.55;}
+  .cs{background:var(--surface);border:1px solid var(--line-soft);border-radius:12px;padding:20px 20px 22px;margin-bottom:20px;}
+  .cs-tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--faint);margin-bottom:9px;}
+  .cs-tag .id{color:var(--accent);}
+  .cs h3{font-size:17px;margin:0 0 9px;color:var(--text);font-weight:600;}
+  .cs-desc{color:var(--muted);font-size:14.5px;margin:0 0 16px;}
+  .cs-steps{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px;}
+  .cs-steps .s{font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line-soft);border-radius:100px;padding:4px 11px;}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .card{border-radius:9px;padding:13px 14px;font-size:13px;border:1px solid var(--line);background:var(--bg);}
+  .card.pass{border-left:3px solid var(--pass);}
+  .card.bug{border-left:3px solid var(--run);}
+  .card .ch{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.05em;display:flex;justify-content:space-between;margin-bottom:10px;}
+  .card.pass .ch{color:var(--pass);}
+  .card.bug .ch{color:var(--run);}
+  .kv{display:grid;grid-template-columns:74px 1fr;gap:3px 10px;margin-bottom:7px;}
+  .kv:last-child{margin-bottom:0;}
+  .kv .kk{font-family:var(--mono);font-size:11px;color:var(--faint);}
+  .kv .vv{color:var(--muted);font-size:12.5px;}
+  .kv .vv.ok{color:var(--text);}
+  .cs-metric{margin-top:16px;font-size:14px;color:var(--text);display:flex;gap:9px;align-items:baseline;}
+  .cs-metric .b{color:var(--accent);}
+  .cs-metric b{color:var(--pass);font-weight:600;font-family:var(--mono);}
+
+  /* ---------- recognition ---------- */
+  .rec{display:grid;gap:13px;}
+  .rec-item{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--radius);padding:15px 17px;}
+  .rec-item .rl{font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.05em;margin-bottom:6px;}
+  .rec-item h3{font-size:15px;margin:0 0 5px;color:var(--text);font-weight:600;line-height:1.4;}
+  .rec-item p{margin:0;color:var(--muted);font-size:13.5px;}
+  .rec-item .doi{font-family:var(--mono);font-size:12px;}
+
+  /* ---------- contact ---------- */
+  .contact{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:30px 26px;}
+  .contact h2{font-size:23px;margin:0 0 10px;color:var(--text);font-weight:700;letter-spacing:-.01em;}
+  .contact p{color:var(--muted);max-width:58ch;margin:0 0 22px;}
+
+  /* ---------- footer ---------- */
+  footer{padding:30px 0 46px;border-top:1px solid var(--line-soft);margin-top:34px;}
+  .foot-in{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:12.5px;color:var(--faint);}
+  .toggle{cursor:pointer;user-select:none;color:var(--muted);display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:100px;padding:5px 12px;background:var(--surface);}
+  .toggle .tdot{width:7px;height:7px;border-radius:50%;background:var(--pass);}
+  .toggle.off .tdot{background:var(--faint);}
+
+  /* ---------- crawling bug easter egg ---------- */
+  #bug{position:fixed;bottom:7px;left:0;z-index:60;pointer-events:none;animation:crawlX 30s linear infinite alternate;}
+  #bug .body{display:inline-block;line-height:0;filter:drop-shadow(0 1px 2px var(--bug-shadow));animation:crawlBob .42s ease-in-out infinite;}
+  #bug.paused{animation-play-state:paused;}
+  #bug.paused .body{animation-play-state:paused;}
+  #bug.hidden{display:none;}
+  @keyframes crawlX{from{transform:translateX(3vw);}to{transform:translateX(93vw);}}
+  @keyframes crawlBob{0%,100%{transform:translateY(0) rotate(-5deg);}50%{transform:translateY(-2px) rotate(5deg);}}
+  @media (prefers-reduced-motion:reduce){
+    #bug{animation:none;left:auto;right:16px;bottom:10px;}
+    #bug .body{animation:none;transform:none;}
+  }
+  @media print{#bug{display:none;}}
+
+  /* ---------- reveal ---------- */
+  .js .reveal{opacity:0;transform:translateY(10px);}
+  .js .reveal.in{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease;}
+
+  @media (max-width:680px){
+    .profile-grid{grid-template-columns:1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .job{grid-template-columns:1fr;gap:6px;}
+    .job-when .st{margin-top:4px;}
+    .cards{grid-template-columns:1fr;}
+    .hero{padding:44px 0 24px;}
+    .brand{font-size:12.5px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .js .reveal{opacity:1;transform:none;transition:none;}
+    .dot,.chip-run .rdot{animation:none!important;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- print ---------- */
+  @media print{
+    html[data-theme]{--bg:#fff;--surface:#fff;--surface-2:#f4f6f9;--text:#0c1320;--muted:#334;--faint:#667;--line:#d8cce6;--line-soft:#ece4f3;--accent:#6C3F97;--pass:#1a7a4d;--run:#9a5f14;}
+    body{background:#fff;}
+    .topbar,.cta-row,.contact,footer,.prompt{display:none;}
+    .tc,.hero{padding:14px 0;}
+    .cs,.skillcard,.facts,.rec-item,.card{break-inside:avoid;}
+    a{color:var(--text);}
+  }
+</style>
+</head>
+<body class="live">
+
+  <div class="topbar">
+    <div class="topbar-in">
+      <span class="brand"><b>PVJ</b> · priyanka.jinde</span>
+      <nav class="nav">
+        <a href="#tc-001">profile</a>
+        <a href="#tc-002">skills</a>
+        <a href="#tc-003">work</a>
+        <a href="#tc-004">case&nbsp;studies</a>
+        <a href="#tc-006">contact</a>
+      </nav>
+      <span class="avail" id="avail"><span class="dot"></span>OPEN TO OPPORTUNITIES</span>
+      <button class="themebtn" id="themebtn" type="button" aria-label="Toggle light or dark theme">☾</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="prompt reveal"><span class="c">$</span> <span class="path">~/network-validation</span> ./run release_readiness.sh --live</div>
+      <h1 class="reveal">I break the network in the lab <span class="em">so it holds in the field.</span></h1>
+      <p class="lede reveal">Senior Software QA Engineer with <b>8+ years</b> across 4G / CBRS / MOCN telecom infrastructure, spanning private network validation, RAN interoperability, and core performance at scale. I plan the coverage, chase failures to root cause, and build the automation that keeps releases honest. Lately, a self-built AI pipeline that authors test plans.</p>
+      <div class="meta reveal">
+        <span><span class="k">role</span> Senior QA · Telecom</span>
+        <span><span class="k">focus</span> CBRS · MOCN · LTE core</span>
+        <span><span class="k">loc</span> Pune, India</span>
+      </div>
+      <div class="cta-row reveal">
+        <a class="btn btn-primary" href="mailto:priyankavjinde@gmail.com">✉ Email me</a>
+        <a class="btn" href="https://www.linkedin.com/in/priyanka-j-39b20466/" target="_blank" rel="noopener">in · LinkedIn</a>
+        <a class="btn" href="#tc-004">↓ Case studies</a>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><div class="n">8<span class="u">+ yrs</span></div><div class="l">Telecom QA &amp; test automation</div></div>
+        <div class="stat"><div class="n">90,000</div><div class="l">Concurrent sessions validated · LTE/CUPS</div></div>
+        <div class="stat"><div class="n">2,000<span class="u">+</span></div><div class="l">Test cases authored · Private 4G CBRS</div></div>
+        <div class="stat"><div class="n">600<span class="u">+</span></div><div class="l">Perl/Python cases automated</div></div>
+      </div>
+    </header>
+
+    <!-- TC-001 PROFILE -->
+    <section class="tc reveal" id="tc-001">
+      <div class="tc-head">
+        <span class="tc-id">TC-001</span>
+        <h2 class="tc-title">Profile Verification</h2>
+        <span class="chip chip-pass">PASS</span>
+      </div>
+      <div class="profile-grid">
+        <div class="profile-prose">
+          <p>I've spent the last eight years making sure telecom networks behave, from <b>private 4G CBRS deployments</b> and multi-vendor RAN interoperability to <b>LTE core validation at 90,000 concurrent sessions</b>. My day is reading feature specs against 3GPP, designing scenarios that catch what slips past development, and reproducing the field issues nobody can pin down.</p>
+          <p>I own QA end-to-end on the features I take: acceptance criteria the dev team builds against, test corpus that grows release over release, and automation in Python and Perl so regression doesn't eat the calendar. I'm the primary QA contact for enterprise MOCN customers, which means the bug reports I write have to be right the first time.</p>
+          <p>Strong 3GPP grounding across UMTS and LTE, actively expanding into <b>5G NR</b>, and increasingly building the tooling QA runs on, including a multi-agent LLM pipeline for test-plan authoring.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><div class="fl">based in</div><div class="fv">Pune, India</div></div>
+          <div class="fact"><div class="fl">experience</div><div class="fv">8+ years · telecom QA</div></div>
+          <div class="fact"><div class="fl">education</div><div class="fv">M.Tech, E&amp;TC · VJTI (CPI 9.45)</div></div>
+          <div class="fact"><div class="fl">domain</div><div class="fv">3GPP LTE/UMTS · CBRS · MOCN · 5G NR</div></div>
+          <div class="fact"><div class="fl">available for</div><div class="fv">Senior / lead QA roles · consulting</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TC-002 SKILLS -->
+    <section class="tc reveal" id="tc-002">
+      <div class="tc-head">
+        <span class="tc-id">TC-002</span>
+        <h2 class="tc-title">Environment &amp; Tools Check</h2>
+        <span class="chip chip-pass">PASS</span>
+      </div>
+      <div class="skills-grid">
+        <div class="skillcard">
+          <h3><span class="ok">✓</span> Testing &amp; Methodology</h3>
+          <div class="taglist">
+            <span class="tag">Test plan design &amp; execution</span>
+            <span class="tag">Protocol-level interoperability</span>
+            <span class="tag">Multi-vendor RAN validation</span>
+            <span class="tag">Field-issue reproduction</span>
+            <span class="tag">Performance testing</span>
+            <span class="tag">Real UE testing</span>
+            <span class="tag">Longevity / stability runs</span>
+            <span class="tag">Test automation architecture</span>
+          </div>
+        </div>
+        <div class="skillcard">
+          <h3><span class="ok">✓</span> Wireless &amp; Protocol Depth</h3>
+          <div class="taglist">
+            <span class="tag">3GPP LTE / UMTS</span>
+            <span class="tag">CBRS</span>
+            <span class="tag">MOCN</span>
+            <span class="tag">S1AP / X2AP</span>
+            <span class="tag">Handover &amp; coexistence</span>
+            <span class="tag">RF-adjacent troubleshooting</span>
+          </div>
+        </div>
+        <div class="skillcard">
+          <h3><span class="ok">✓</span> AI / LLM Engineering</h3>
+          <div class="taglist">
+            <span class="tag">Multi-agent orchestration</span>
+            <span class="tag">Prompt &amp; pipeline architecture</span>
+            <span class="tag">Claude Agent SDK / Anthropic API</span>
+            <span class="tag">Retrieval-augmented routing</span>
+            <span class="tag">Self-improving agent design</span>
+            <span class="tag">Git-based knowledge persistence</span>
+          </div>
+        </div>
+        <div class="skillcard">
+          <h3><span class="ok">✓</span> Backend &amp; Frontend</h3>
+          <div class="taglist">
+            <span class="tag">Python</span>
+            <span class="tag">FastAPI</span>
+            <span class="tag">REST API design</span>
+            <span class="tag">JSON schema / data pipelines</span>
+            <span class="tag">Excel export (openpyxl)</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </div>
+        <div class="skillcard">
+          <h3><span class="ok">✓</span> Tools &amp; Infrastructure</h3>
+          <div class="taglist">
+            <span class="tag">Perl</span>
+            <span class="tag">Jenkins CI</span>
+            <span class="tag">Wireshark</span>
+            <span class="tag">JIRA</span>
+            <span class="tag">TestRail</span>
+            <span class="tag">Linux</span>
+            <span class="tag">Kubernetes</span>
+            <span class="tag">Git · MySQL</span>
+          </div>
+        </div>
+        <div class="skillcard">
+          <h3><span class="ok">✓</span> Cloud &amp; Environments</h3>
+          <div class="taglist">
+            <span class="tag">GCP</span>
+            <span class="tag">AWS</span>
+            <span class="tag">Azure</span>
+            <span class="tag">VMware</span>
+            <span class="tag">Hybrid cloud / on-prem</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TC-003 CAREER -->
+    <section class="tc reveal" id="tc-003">
+      <div class="tc-head">
+        <span class="tc-id">TC-003</span>
+        <h2 class="tc-title">Regression Suite · Career History</h2>
+        <span class="chip chip-run"><span class="rdot"></span>RUNNING</span>
+      </div>
+
+      <div class="job">
+        <div class="job-when">Aug 2022 – Present<div class="st st-run"><span class="sdot"></span>RUNNING</div></div>
+        <div>
+          <h3>Senior Software QA Engineer</h3>
+          <div class="co">Highway9 Networks · Pune</div>
+          <ul>
+            <li>Built a <b>7-agent AI pipeline</b> (spec parsing → scenario generation → Excel export) that cut test-plan authoring time <b>~20%</b>, with a git-tracked memory system that improves release over release.</li>
+            <li>Own planning &amp; execution for 2–3 features per release: <b>70+ test cases per cycle</b>, 50+ features validated end-to-end, and a <b>2,000+ case corpus</b> across Private 4G CBRS.</li>
+            <li>Primary QA contact for <b>6–7 enterprise MOCN customers</b> with top US telcos, covering upgrade coordination, stability validation, and live-environment triage; built the escalation process that scaled with the customer base.</li>
+            <li>Validated MME across hybrid cloud and on-prem (GCP / AWS / Azure / VMware); tracked attach success, throughput KPIs, and call-drop patterns to inform release readiness.</li>
+            <li>Tested handover and CBRS coexistence across multi-vendor radios per 3GPP / FCC; review specs against 3GPP and write acceptance criteria dev builds against.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-when">May 2021 – Jul 2022<div class="st st-pass"><span class="sdot"></span>PASSED</div></div>
+        <div>
+          <h3>Software QA Engineer</h3>
+          <div class="co">Cisco Systems Pvt Ltd · Pune</div>
+          <ul>
+            <li>Ran performance &amp; scalability testing on SAEGW / PGW / SGW with CUPS across 10-VM configs (1 Control Plane + 9 User Planes), each UP sustaining 10,000 calls, for <b>90,000 sessions per run</b>.</li>
+            <li>Designed 24-hour+ longevity and overnight call-model runs, surfacing memory, stability, and throughput regressions before production.</li>
+            <li>Root-caused system failures into reproduction-ready defect reports that sped developer resolution.</li>
+            <li>Recognised with Cisco's <b>"Connect Everything"</b> and <b>"Benefit Everyone"</b> awards, given to 1 of 10 engineers per release.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-when">Jan 2018 – May 2021<div class="st st-pass"><span class="sdot"></span>PASSED</div></div>
+        <div>
+          <h3>Automation Engineer</h3>
+          <div class="co">Parallel Wireless · Pune</div>
+          <ul>
+            <li>Scripted <b>600+ automated Perl/Python cases</b> across 3G (HNBGW) and 4G (X2GW), covering MOCN, X2 Handover, SCTP MH, and Paging Optimisation, cutting per-sprint manual effort.</li>
+            <li>Filed <b>300+ defect / improvement JIRAs</b> with full reproduction steps, log traces, and protocol analysis.</li>
+            <li>Built an internal PHP/MySQL tool linking every test case to its defect history, surfacing recurring failure patterns before sign-off.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job">
+        <div class="job-when">Jul 2017 – Jan 2018<div class="st st-pass"><span class="sdot"></span>PASSED</div></div>
+        <div>
+          <h3>Lecturer</h3>
+          <div class="co">VJTI, Matunga · Mumbai</div>
+          <ul>
+            <li>Delivered undergraduate coursework in microprocessor architecture, mobile communication, electronics, and microcontrollers.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TC-004 CASE STUDIES -->
+    <section class="tc reveal" id="tc-004">
+      <div class="tc-head">
+        <span class="tc-id">TC-004</span>
+        <h2 class="tc-title">Case Studies</h2>
+        <span class="chip chip-demo">SELECTED WORK</span>
+      </div>
+      <div class="cs-note">// These reflect real work. Specific test IDs, payloads, and vendor names shown are representative examples of format &amp; approach. Actual client / employer data stays confidential.</div>
+
+      <!-- CS-01 -->
+      <article class="cs">
+        <div class="cs-tag"><span class="id">CS-01</span> · RAN INTEROPERABILITY · CBRS / MOCN</div>
+        <h3>Multi-Vendor Handover &amp; CBRS Coexistence</h3>
+        <p class="cs-desc">Private 4G deployments where multiple enterprises share infrastructure via MOCN, with RAN from different radio vendors. The job: confirm handover and CBRS coexistence hold across vendor-class radios under live conditions, per 3GPP / FCC spec.</p>
+        <div class="cs-steps">
+          <span class="s">Spec review vs 3GPP</span><span class="s">Scenario design</span><span class="s">Multi-vendor testbed</span><span class="s">Real UE runs</span><span class="s">Field-issue triage</span>
+        </div>
+        <div class="cards">
+          <div class="card pass">
+            <div class="ch"><span>TEST CASE · TC-141</span><span>PASS</span></div>
+            <div class="kv"><span class="kk">Layer</span><span class="vv">X2AP / Handover</span></div>
+            <div class="kv"><span class="kk">Steps</span><span class="vv">UE on source radio → X2 handover to target radio under load</span></div>
+            <div class="kv"><span class="kk">Expected</span><span class="vv">Session continuity held; correct PLMN per MOCN</span></div>
+            <div class="kv"><span class="kk">Actual</span><span class="vv ok">Matches expected</span></div>
+          </div>
+          <div class="card bug">
+            <div class="ch"><span>BUG · BUG-318</span><span>MED</span></div>
+            <div class="kv"><span class="kk">Trigger</span><span class="vv">CBRS coexistence during adjacent SAS grant change</span></div>
+            <div class="kv"><span class="kk">Expected</span><span class="vv">No interference-driven drop on grant transition</span></div>
+            <div class="kv"><span class="kk">Actual</span><span class="vv">Transient throughput dip + attach retries; filed w/ logs</span></div>
+            <div class="kv"><span class="kk">Status</span><span class="vv ok">Root-caused → tracked to fix</span></div>
+          </div>
+        </div>
+        <div class="cs-metric"><span class="b">🎯</span><span>Primary QA for <b>6–7 enterprise MOCN customers</b> with top US telcos, coexistence &amp; handover validated per 3GPP / FCC.</span></div>
+      </article>
+
+      <!-- CS-02 -->
+      <article class="cs">
+        <div class="cs-tag"><span class="id">CS-02</span> · CORE PERFORMANCE · CUPS AT SCALE</div>
+        <h3>LTE Core Validation at 90,000 Sessions</h3>
+        <p class="cs-desc">SAEGW / PGW / SGW on CUPS architecture, validated for stability and throughput at production scale before release, plus long-duration runs to catch the regressions that only show up overnight.</p>
+        <div class="cs-steps">
+          <span class="s">10-VM testbed</span><span class="s">Call-model config</span><span class="s">Load ramp</span><span class="s">24h+ longevity</span><span class="s">Root-cause reports</span>
+        </div>
+        <div class="cards">
+          <div class="card pass">
+            <div class="ch"><span>TEST CASE · TC-207</span><span>PASS</span></div>
+            <div class="kv"><span class="kk">Config</span><span class="vv">1 CP + 9 UP · 10k calls/UP</span></div>
+            <div class="kv"><span class="kk">Steps</span><span class="vv">Ramp to 90k sessions, hold, measure attach + throughput</span></div>
+            <div class="kv"><span class="kk">Expected</span><span class="vv">Sessions sustained; KPIs within threshold; CP/UP stable</span></div>
+            <div class="kv"><span class="kk">Actual</span><span class="vv ok">Matches expected</span></div>
+          </div>
+          <div class="card bug">
+            <div class="ch"><span>BUG · BUG-229</span><span>HIGH</span></div>
+            <div class="kv"><span class="kk">Run</span><span class="vv">24-hour+ longevity, overnight call model</span></div>
+            <div class="kv"><span class="kk">Expected</span><span class="vv">No memory growth / throughput decay over 24h</span></div>
+            <div class="kv"><span class="kk">Actual</span><span class="vv">Memory regression surfaced overnight, caught pre-prod</span></div>
+            <div class="kv"><span class="kk">Status</span><span class="vv ok">Reproduction-ready defect → fixed before release</span></div>
+          </div>
+        </div>
+        <div class="cs-metric"><span class="b">🎯</span><span><b>90,000 concurrent sessions</b> validated per run; longevity regressions caught before they reached production.</span></div>
+      </article>
+
+      <!-- CS-03 -->
+      <article class="cs">
+        <div class="cs-tag"><span class="id">CS-03</span> · AI / LLM ENGINEERING · SELF-BUILT TOOLING</div>
+        <h3>A 7-Agent Pipeline That Authors Test Plans</h3>
+        <p class="cs-desc">Test-plan authoring was slow and uneven, so I built the tool I wanted: a multi-agent LLM pipeline that reads a feature spec, drafts coverage, and exports a structured test plan in the team's format, backed by a git-tracked memory so it gets better every release.</p>
+        <div class="cs-steps">
+          <span class="s">Spec parsing agent</span><span class="s">Scenario generation</span><span class="s">Context routing</span><span class="s">Excel export</span><span class="s">Feedback loop</span>
+        </div>
+        <div class="cards">
+          <div class="card pass">
+            <div class="ch"><span>PIPELINE · RUN-0442</span><span>PASS</span></div>
+            <div class="kv"><span class="kk">Stack</span><span class="vv">Python · FastAPI · Claude Agent SDK · openpyxl</span></div>
+            <div class="kv"><span class="kk">Flow</span><span class="vv">Spec → 7 agents → reviewed draft → team test-plan format</span></div>
+            <div class="kv"><span class="kk">Expected</span><span class="vv">Coverage-complete draft, faster authoring</span></div>
+            <div class="kv"><span class="kk">Actual</span><span class="vv ok">~20% time saved; corpus persists via git memory</span></div>
+          </div>
+          <div class="card pass">
+            <div class="ch"><span>MEMORY · SELF-IMPROVING</span><span>PASS</span></div>
+            <div class="kv"><span class="kk">Design</span><span class="vv">Git-based knowledge persistence per release</span></div>
+            <div class="kv"><span class="kk">Effect</span><span class="vv">Later releases reuse prior scenarios &amp; corrections</span></div>
+            <div class="kv"><span class="kk">Result</span><span class="vv ok">Quality compounds instead of resetting each cycle</span></div>
+          </div>
+        </div>
+        <div class="cs-metric"><span class="b">🎯</span><span><b>–20% authoring time</b> · a <b>2,000+ case corpus</b> · a QA tool that improves itself release over release.</span></div>
+      </article>
+    </section>
+
+    <!-- TC-005 RECOGNITION -->
+    <section class="tc reveal" id="tc-005">
+      <div class="tc-head">
+        <span class="tc-id">TC-005</span>
+        <h2 class="tc-title">Recognition &amp; Publications</h2>
+        <span class="chip chip-pass">PASS</span>
+      </div>
+      <div class="rec">
+        <div class="rec-item">
+          <div class="rl">award · cisco systems</div>
+          <h3>"Connect Everything" &amp; "Benefit Everyone" Awards</h3>
+          <p>Conferred to 1 of 10 engineers per release, for sustained quality contributions across multiple delivery cycles.</p>
+        </div>
+        <div class="rec-item">
+          <div class="rl">ieee upcon 2017 · ieee xplore</div>
+          <h3>Optically Controlled Circular Microstrip Antenna using a Photoconductive Switch</h3>
+          <p class="doi"><a href="https://doi.org/10.1109/UPCON.2017.8251071" target="_blank" rel="noopener">DOI: 10.1109/UPCON.2017.8251071 ↗</a></p>
+        </div>
+        <div class="rec-item">
+          <div class="rl">iosr journal</div>
+          <h3>Comparison of Regular-Shaped Co-axial Fed Conventional &amp; Single-Shorted Microstrip Antennas for Ultra-compactness</h3>
+          <p class="doi"><a href="https://doi.org/10.9790/2834-1204035661" target="_blank" rel="noopener">DOI: 10.9790/2834-1204035661 ↗</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TC-006 CONTACT -->
+    <section class="tc reveal" id="tc-006">
+      <div class="tc-head">
+        <span class="tc-id">TC-006</span>
+        <h2 class="tc-title">Contact Handshake</h2>
+        <span class="chip chip-ready">READY</span>
+      </div>
+      <div class="contact">
+        <h2>Have a network that needs validating?</h2>
+        <p>Open to senior / lead QA roles and consulting across private LTE / CBRS, RAN interoperability, core performance, test automation, or standing up a QA process from scratch. I read specs closely and reply within a day.</p>
+        <div class="cta-row" style="margin-top:0;">
+          <a class="btn btn-primary" href="mailto:priyankavjinde@gmail.com">✉ priyankavjinde@gmail.com</a>
+          <a class="btn" href="https://www.linkedin.com/in/priyanka-j-39b20466/" target="_blank" rel="noopener">in · linkedin.com/in/priyanka-j-39b20466</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot-in">
+        <span>Priyanka V. Jinde · Senior QA Engineer · Pune, India</span>
+        <span style="display:inline-flex;gap:10px;">
+          <span class="toggle" id="bugtoggle" role="button" tabindex="0" aria-label="Toggle crawling bug">🐞 bugs: on</span>
+          <span class="toggle" id="sig" role="button" tabindex="0" aria-label="Toggle signal indicator"><span class="tdot"></span>signal: live</span>
+        </span>
+      </div>
+    </footer>
+
+  </div>
+
+  <div id="bug" aria-hidden="true"><span class="body"><svg viewBox="0 0 24 26" width="26" height="28" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="var(--bug-head)" stroke-width="1.3" stroke-linecap="round">
+      <line x1="6" y1="12" x2="1.5" y2="9"/><line x1="6" y1="15.5" x2="1.5" y2="16.5"/><line x1="7" y1="19" x2="3.5" y2="22"/>
+      <line x1="18" y1="12" x2="22.5" y2="9"/><line x1="18" y1="15.5" x2="22.5" y2="16.5"/><line x1="17" y1="19" x2="20.5" y2="22"/>
+    </g>
+    <circle cx="12" cy="5.5" r="3.4" fill="var(--bug-head)"/>
+    <ellipse cx="12" cy="15" rx="7.2" ry="8.4" fill="var(--bug)"/>
+    <line x1="12" y1="7.2" x2="12" y2="22.8" stroke="var(--bug-head)" stroke-width="1.1"/>
+    <circle cx="8.4" cy="12.4" r="1.35" fill="var(--bug-head)"/><circle cx="15.6" cy="12.4" r="1.35" fill="var(--bug-head)"/>
+    <circle cx="8.7" cy="17.7" r="1.15" fill="var(--bug-head)"/><circle cx="15.3" cy="17.7" r="1.15" fill="var(--bug-head)"/>
+  </svg></span></div>
+
+<script>
+  // one-time staged reveal (respects reduced motion via CSS)
+  (function(){
+    var els = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(e){e.classList.add('in');}); return;
+    }
+    // hero children stagger
+    var hero = els.filter(function(e){return e.closest('.hero');});
+    hero.forEach(function(e,i){ setTimeout(function(){e.classList.add('in');}, 90*i); });
+    // sections on scroll
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+    }, {threshold:.12});
+    els.filter(function(e){return !e.closest('.hero');}).forEach(function(e){io.observe(e);});
+  })();
+
+  // footer easter egg: mirrors the reference's "bugs: on" toggle
+  (function(){
+    var t = document.getElementById('sig');
+    if(!t) return;
+    function flip(){
+      t.classList.toggle('off');
+      var on = !t.classList.contains('off');
+      t.childNodes[1].nodeValue = on ? 'signal: live' : 'signal: idle';
+      document.body.classList.toggle('live', on);
+    }
+    t.addEventListener('click', flip);
+    t.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();} });
+  })();
+
+  // crawling bug toggle
+  (function(){
+    var bt = document.getElementById('bugtoggle');
+    var bug = document.getElementById('bug');
+    if(!bt || !bug) return;
+    function flip(){
+      var on = bug.classList.toggle('hidden') === false;
+      bt.textContent = on ? '🐞 bugs: on' : '🐞 bugs: off';
+      bt.classList.toggle('off', !on);
+    }
+    bt.addEventListener('click', flip);
+    bt.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();flip();} });
+  })();
+
+  // light/dark theme toggle
+  (function(){
+    var btn=document.getElementById('themebtn'); var root=document.documentElement;
+    if(!btn) return;
+    function icon(){ btn.textContent = root.getAttribute('data-theme')==='dark' ? '☀' : '☾'; }
+    icon();
+    btn.addEventListener('click', function(){
+      var next = root.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try{ localStorage.setItem('pvj-theme', next); }catch(e){}
+      icon();
+    });
+  })();
+</script>
+</body>
+</html>
